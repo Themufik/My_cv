@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>mufik - Python Developer</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --bg: #050505;
+    --bg2: #0b0b0d;
+    --bg3: #121215;
+    --border: #1a1a1e;
+    --text: #e8e8e8;
+    --muted: #62626a;
+    --accent: #c8ff00;
+    --mono: 'JetBrains Mono', monospace;
+    --sans: 'Inter', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    font-size: 15px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  ::selection { background: var(--accent); color: #000; }
+
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 48px;
+    background: rgba(5, 5, 5, 0.6);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo {
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 36px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--muted);
+    text-decoration: none;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--text); }
+
+  /* --- ОБНОВЛЕННЫЙ ХЕРО-ФОН В СТИЛЕ РЕФЕРЕНСА --- */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 120px 48px 80px;
+    position: relative;
+    overflow: hidden;
+    background: #050505;
+  }
+
+  /* Цифровая текстура / зернистость */
+  .hero-noise {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.025;
+    pointer-events: none;
+    z-index: 1;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  }
+
+  /* Имитация объемных металлических полос под углом из изображение.jpg */
+  .hero-stripes {
+    position: absolute;
+    inset: -50%;
+    z-index: 2;
+    background: repeating-linear-gradient(
+      135deg,
+      #050505 0px,
+      #050505 120px,
+      #09090b 120px,
+      #0d0d11 200px,
+      #14141a 240px,
+      #0d0d11 280px,
+      #050505 360px,
+      #050505 480px
+    );
+    opacity: 0.85;
+  }
+
+  /* Мягкие тени и контрастные световые пятна поверх полос */
+  .hero-vignette {
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+    background:
+      radial-gradient(circle at 70% 40%, rgba(200, 255, 0, 0.06), transparent 60%),
+      radial-gradient(circle at 30% 80%, rgba(0, 0, 0, 0.8), transparent 70%),
+      linear-gradient(to bottom, transparent 50%, #050505 100%);
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 4;
+    text-align: center;
+    max-width: 720px;
+  }
+
+  .hero-tag {
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    border: 1px solid rgba(200,255,0,0.2);
+    padding: 6px 16px;
+    border-radius: 2px;
+    margin-bottom: 32px;
+    background: rgba(200, 255, 0, 0.02);
+    backdrop-filter: blur(4px);
+    opacity: 0;
+    animation: fadeUp 0.6s 0.2s forwards;
+  }
+
+  .hero-name {
+    font-family: var(--mono);
+    font-size: clamp(42px, 7vw, 80px);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    color: var(--text);
+    text-shadow: 0 0 40px rgba(232, 232, 232, 0.05);
+    opacity: 0;
+    animation: fadeUp 0.6s 0.4s forwards;
+  }
+
+  .hero-sub {
+    margin-top: 24px;
+    font-size: 16px;
+    color: var(--muted);
+    font-weight: 300;
+    opacity: 0;
+    animation: fadeUp 0.6s 0.6s forwards;
+  }
+  .hero-sub strong { color: var(--text); font-weight: 500; }
+
+  .hero-cta {
+    margin-top: 48px;
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    opacity: 0;
+    animation: fadeUp 0.6s 0.8s forwards;
+  }
+
+  .btn {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 14px 28px;
+    border: 1px solid;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    display: inline-block;
+  }
+
+  .btn-primary {
+    background: var(--accent);
+    color: #000;
+    border-color: var(--accent);
+    box-shadow: 0 4px 20px rgba(200, 255, 0, 0.15);
+  }
+
+  .btn-primary:hover {
+    background: transparent;
+    color: var(--accent);
+    box-shadow: 0 4px 20px rgba(200, 255, 0, 0.0);
+  }
+
+  .btn-secondary {
+    background: transparent;
+    color: var(--muted);
+    border-color: var(--border);
+  }
+
+  .btn-secondary:hover {
+    color: var(--text);
+    border-color: var(--text);
+    background: rgba(255, 255, 255, 0.02);
+  }
+
+  section {
+    padding: 100px 48px;
+    max-width: 1100px;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  .section-label {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 16px;
+  }
+
+  .section-title {
+    font-family: var(--mono);
+    font-size: clamp(28px, 4vw, 48px);
+    font-weight: 700;
+    line-height: 1.1;
+    margin-bottom: 56px;
+    color: var(--text);
+  }
+
+  .divider {
+    width: calc(100% - 96px);
+    height: 1px;
+    background: var(--border);
+    margin: 0 auto;
+  }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    align-items: start;
+  }
+
+  .about-text {
+    font-size: 16px;
+    color: var(--muted);
+    line-height: 1.8;
+  }
+
+  .about-text p + p { margin-top: 16px; }
+  .about-text strong { color: var(--text); font-weight: 500; }
+
+  .about-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    background: var(--border);
+    border: 1px solid var(--border);
+  }
+
+  .stat {
+    background: var(--bg2);
+    padding: 28px 24px;
+    transition: background 0.2s;
+  }
+
+  .stat:hover { background: var(--bg3); }
+
+  .stat-num {
+    font-family: var(--mono);
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--accent);
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    background: var(--border);
+    border: 1px solid var(--border);
+  }
+
+  .skill-card {
+    background: var(--bg2);
+    padding: 32px 28px;
+    transition: all 0.25s ease;
+    cursor: default;
+  }
+
+  .skill-card:hover {
+    background: var(--bg3);
+    transform: translateY(-2px);
+  }
+
+  .skill-icon {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  .skill-name {
+    font-family: var(--mono);
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 8px;
+  }
+
+  .skill-desc {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  .next-label {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-top: 48px;
+    margin-bottom: 16px;
+  }
+
+  .next-card {
+    background: var(--bg2);
+    border: 1px solid rgba(200,255,0,0.15);
+    padding: 28px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .next-dot {
+    width: 8px;
+    height: 8px;
+    background: var(--accent);
+    border-radius: 50%;
+    flex-shrink: 0;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+
+  .next-text {
+    font-family: var(--mono);
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  .next-text strong {
+    color: var(--accent);
+    font-weight: 600;
+  }
+
+  .projects-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    background: var(--border);
+    border: 1px solid var(--border);
+  }
+
+  .project-card {
+    background: var(--bg2);
+    padding: 36px 40px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 32px;
+    align-items: center;
+    transition: all 0.25s ease;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .project-card:hover {
+    background: var(--bg3);
+  }
+
+  .project-card:hover .project-arrow { color: var(--accent); transform: translate(4px, -4px); }
+
+  .project-tag {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 10px;
+  }
+
+  .project-name {
+    font-family: var(--mono);
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 10px;
+  }
+
+  .project-desc {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.6;
+    max-width: 560px;
+  }
+
+  .project-stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 16px;
+  }
+
+  .tag {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    border: 1px solid var(--border);
+    padding: 4px 10px;
+    background: transparent;
+    transition: all 0.2s ease;
+  }
+
+  .tag:hover {
+    border-color: rgba(200, 255, 0, 0.4);
+    background: rgba(200, 255, 0, 0.05);
+    color: #ffffff;
+    transform: translateY(-1px);
+  }
+
+  .project-arrow {
+    font-size: 24px;
+    color: var(--border);
+    transition: all 0.25s ease;
+  }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    background: var(--border);
+    border: 1px solid var(--border);
+  }
+
+  .contact-card {
+    background: var(--bg2);
+    padding: 32px 28px;
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.25s ease;
+    display: block;
+  }
+
+  .contact-card:hover {
+    background: var(--bg3);
+  }
+
+  .contact-type {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 10px;
+  }
+
+  .contact-value {
+    font-family: var(--mono);
+    font-size: 16px;
+    color: var(--text);
+  }
+
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 32px 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--bg);
+  }
+
+  footer span {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  @media (max-width: 768px) {
+    nav { padding: 16px 24px; }
+    .nav-links { gap: 20px; }
+    section { padding: 64px 24px; }
+    .hero { padding: 100px 24px 64px; }
+    .about-grid, .skills-grid, .contact-grid { grid-template-columns: 1fr; }
+    .project-card { grid-template-columns: 1fr; }
+    .project-arrow { display: none; }
+    footer { flex-direction: column; gap: 8px; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-logo">mufik<span>.</span>dev</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<div class="hero">
+  <div class="hero-noise"></div>
+  <div class="hero-stripes"></div>
+  <div class="hero-vignette"></div>
+  <div class="hero-content">
+    <span class="hero-tag">Active Custom Unix Environment</span>
+    <h1 class="hero-name">mufik</h1>
+    <p class="hero-sub">Строю производительные асинхронные бэкенды на <strong>Python</strong>. Преподаю алгоритмы и координирую тех-проекты.</p>
+    <div class="hero-cta">
+      <a href="#projects" class="btn btn-primary">View Projects</a>
+      <a href="#contact" class="btn btn-secondary">Contact Me</a>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<section id="about">
+  <p class="section-label">// 01 - About</p>
+  <h2 class="section-title reveal">Who I am</h2>
+  <div class="about-grid">
+    <div class="about-text reveal">
+      <p>Python разработчик, которому интересно не просто писать код - а понимать как он работает и почему именно так на системном уровне. Строю надёжные, асинхронные и оптимизированные решения.</p>
+      <p>Помимо бэкенд-разработки, я имею за плечами опыт работы в роли <strong>programming mentor & technical coordinator в Technohub </strong>. Я управлял процессами и администрировал проекты онлайн-обучения, а также вел буткемпы для детей и подростков по основам AI. Помимо этого, успешно руководил курсом по основам веб-разработки на Python для взрослой аудитории.</p>
+      <p>Следующая вершина Rust. Максимальная надёжность, скорость и безопасность памяти - именно то, что отделяет хорошее ПО от великого.</p>
+      <p>За пределами кода: Unix-среда (Arch Linux), калистеника, чтение. Считаю, что ясная голова и системный подход - главные инструменты разработчика.</p>
+    </div>
+    <div class="about-stats reveal">
+      <div class="stat">
+        <div class="stat-num">FastAPI</div>
+        <div class="stat-label">Main Core</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">AI & Py</div>
+        <div class="stat-label">Technohub Mentor</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">18</div>
+        <div class="stat-label">Years old</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">Rust</div>
+        <div class="stat-label">Next target</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section id="skills">
+  <p class="section-label">// 02 - Skills</p>
+  <h2 class="section-title reveal">Technical Arsenal</h2>
+  <div class="skills-grid">
+    <div class="skill-card reveal">
+      <div class="skill-icon">// lang</div>
+      <div class="skill-name">Python Async</div>
+      <div class="skill-desc">Глубокое понимание async/await, многопоточности, генераторов, дебаггинга и строгой типизации (mypy/pydantic).</div>
+    </div>
+    <div class="skill-card reveal">
+      <div class="skill-icon">// framework</div>
+      <div class="skill-name">FastAPI & Django</div>
+      <div class="skill-desc">Разработка масштабируемых REST API, JWT-авторизация, кастомные зависимости (Depends) и оптимизация ORM.</div>
+    </div>
+    <div class="skill-card reveal">
+      <div class="skill-icon">// database</div>
+      <div class="skill-name">SQLAlchemy</div>
+      <div class="skill-desc">Проектирование реляционных баз данных, сложные миграции Alembic, оптимизация запросов в PostgreSQL и aiosqlite.</div>
+    </div>
+    <div class="skill-card reveal">
+      <div class="skill-icon">// ecosystems</div>
+      <div class="skill-name">aiogram Enterprise</div>
+      <div class="skill-desc">Создание сложных Telegram-систем, построение архитектуры через FSM (конечные автоматы), кастомные мидлвари.</div>
+    </div>
+    <div class="skill-card reveal">
+      <div class="skill-icon">// tools</div>
+      <div class="skill-name">Git & Docker</div>
+      <div class="skill-desc">Контейнеризация бэкенда, написание чистых Dockerfile, оркестрация через docker-compose, git-flow.</div>
+    </div>
+    <div class="skill-card reveal">
+      <div class="skill-icon">// environment</div>
+      <div class="skill-name">Arch Linux Core</div>
+      <div class="skill-desc">Работа исключительно в Unix-среде (Fish shell). Автоматизация задач через Bash/Python скрипты.</div>
+    </div>
+  </div>
+
+  <p class="next-label">// Currently learning</p>
+  <div class="next-card reveal">
+    <div class="next-dot"></div>
+    <div class="next-text">
+      Следующий этап - <strong>Rust</strong>. Язык системного программирования с максимальной надёжностью и скоростью без garbage collector. Цель: писать защищённое и высокопроизводительное ПО.
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section id="projects">
+  <p class="section-label">// 03 - Projects</p>
+  <h2 class="section-title reveal">What I've built</h2>
+  <div class="projects-list">
+
+    <a href="https://github.com/Themufik/-Avrora-CRM" target="_blank" class="project-card reveal">
+      <div>
+        <div class="project-tag">// production · crm</div>
+        <div class="project-name">Avrora CRM</div>
+        <div class="project-desc">CRM система с JWT авторизацией, управлением клиентами и ролевой моделью. REST API с автодокументацией через Swagger / OpenAPI.</div>
+        <div class="project-stack">
+          <span class="tag">FastAPI</span>
+          <span class="tag">SQLAlchemy</span>
+          <span class="tag">Pydantic v2</span>
+          <span class="tag">PostgreSQL</span>
+          <span class="tag">Docker</span>
+        </div>
+      </div>
+      <div class="project-arrow">↗</div>
+    </a>
+
+    <a href="https://github.com/Themufik/Areon" target="_blank" class="project-card reveal">
+      <div>
+        <div class="project-tag">// educational · fullstack</div>
+        <div class="project-name">Areon Platform</div>
+        <div class="project-desc">Платформа для совместного использования и публикации образовательных курсов. Реализована сложная бизнес-логика: профили, комментарии, модули и кастомная панель модератора.</div>
+        <div class="project-stack">
+          <span class="tag">Django</span>
+          <span class="tag">DRF</span>
+          <span class="tag">PostgreSQL</span>
+          <span class="tag">Vanilla JS</span>
+        </div>
+      </div>
+      <div class="project-arrow">↗</div>
+    </a>
+
+    <a href="https://github.com/Themufik/Nova" target="_blank" class="project-card reveal">
+      <div>
+        <div class="project-tag">// active project · telegram bot</div>
+        <div class="project-name">Nova: Calorie Tracker</div>
+        <div class="project-desc">Асинхронный Телеграм-бот для трекинга КБЖУ домашней еды. Интегрирована база данных для мгновенного логирования продуктов, подсчёта калорийности сложных блюд и вывода дневной статистики.</div>
+        <div class="project-stack">
+          <span class="tag">aiogram 3.x</span>
+          <span class="tag">aiosqlite</span>
+          <span class="tag">FSM</span>
+          <span class="tag">Python</span>
+        </div>
+      </div>
+      <div class="project-arrow">↗</div>
+    </a>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section id="contact">
+  <p class="section-label">// 04 -  Contact</p>
+  <h2 class="section-title reveal">Get in touch</h2>
+  <div class="contact-grid">
+    <a href="https://github.com/Themufik" target="_blank" class="contact-card reveal">
+      <div class="contact-type">// github</div>
+      <div class="contact-value">github.com/Themufik</div>
+    </a>
+    <a href="https://t.me/themufik" target="_blank" class="contact-card reveal">
+      <div class="contact-type">// telegram</div>
+      <div class="contact-value">@themufik</div>
+    </a>
+    <a href="mailto:vsujdgg@gmail.com" class="contact-card reveal">
+      <div class="contact-type">// email</div>
+      <div class="contact-value">vsujdgg@gmail.com</div>
+    </a>
+  </div>
+</section>
+
+<footer>
+  <span>mufik // 2026</span>
+  <span>built with clean code approach</span>
+</footer>
+
+<script>
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
+
+  document.querySelectorAll('.skill-card').forEach((card, i) => {
+    card.style.transitionDelay = `${i * 60}ms`;
+  });
+</script>
+
+</body>
+</html>
