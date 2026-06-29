@@ -1,0 +1,13 @@
+.skill-card {
+    background: var(--bg2);
+    padding: 32px 28px;
+    transition: transform 0.15s ease-out, background 0.25s ease; /* Изменили transition для плавности */
+    cursor: default;
+    will-change: transform; /* Подсказка браузеру для плавной анимации */
+    transform-style: preserve-3d; /* Добавляет 3D-эффект для вложенных элементов */
+}
+
+/* При ховере чуть приподнимаем карточку (базовый эффект, JS сделает остальное) */
+.skill-card:hover {
+    background: var(--bg3);
+}
