@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Muhammadfarid kucharzoda Python Developer</title>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -36,35 +36,20 @@
 
 <div class="divider"></div>
 
-<section id="about">
-  <p class="section-label">// 01 - About</p>
-  <h2 class="section-title">Who I am</h2>
-  <div class="about-grid">
-    <div class="about-text">
-      <p>Python разработчик, которому интересно не просто писать код - а понимать как он работает и почему именно так на системном уровне. Строю надёжные, асинхронные и оптимизированные решения.</p>
-      <p>Помимо бэкенд-разработки, я имею за плечами опыт работы в роли <strong>programming mentor & technical coordinator в Technohub Dushanbe</strong>. Я управлял процессами и администрировал проекты онлайн-обучения, а также вел буткемпы для детей и подростков по основам AI. Помимо этого, успешно руководил курсом по основам веб-разработки на Python для взрослой аудитории.</p>
-      <p>Following target - Rust. Максимальная надёжность, скорость и безопасность памяти - именно то, что отделяет хорошее ПО от великого.</p>
-      <p>За пределами кода: Unix-среда (Arch Linux), калистеника, чтение. Считаю, что ясная голова и системный подход - главные инструменты разработчика.</p>
-    </div>
-    <div class="about-stats reveal">
-      <div class="stat tilt-target">
-        <div class="stat-num">FastAPI</div>
-        <div class="stat-label">Main Core</div>
-      </div>
-      <div class="stat tilt-target">
-        <div class="stat-num">AI & Py</div>
-        <div class="stat-label">Technohub Mentor</div>
-      </div>
-      <div class="stat tilt-target">
-        <div class="stat-num">17</div>
-        <div class="stat-label">Years old</div>
-      </div>
-      <div class="stat tilt-target">
-        <div class="stat-num">Rust</div>
-        <div class="stat-label">Next target</div>
-      </div>
-    </div>
+<!-- Секция About — заголовки отдельно сверху, интерактивный текст отдельно снизу -->
+<section id="about" style="padding: 60px 40px; background: transparent;">
+
+  <!-- Заголовки как в оригинале, никакой canvas на них не влияет -->
+  <div class="about-header" style="margin-bottom: 40px;">
+    <p class="section-label" style="margin: 0;">// 01 - About</p>
+    <h2 class="section-title" style="margin: 10px 0 0 0; font-size: 3rem; font-weight: 700;">Who I am</h2>
   </div>
+
+  <!-- Отдельный чистый блок чисто под интерактивный текст -->
+  <div class="about-text-container" style="position: relative; width: 100%; min-height: 450px; overflow: hidden;">
+    <canvas id="textCanvas" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1;"></canvas>
+  </div>
+
 </section>
 
 <div class="divider"></div>
@@ -196,6 +181,8 @@
   <span>Built with clean HTML/CSS & JS</span>
 </footer>
 
+<script src="main.js"></script>
+
 <script>
   const targets = document.querySelectorAll('.tilt-target');
   const maxTilt = 12;
@@ -216,22 +203,6 @@
       el.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
     });
   });
-
-  if (window.DeviceOrientationEvent) {
-    window.addEventListener('deviceorientation', (e) => {
-      let b = e.beta;
-      let g = e.gamma;
-      if (b === null || g === null) return;
-      let tx = Math.min(Math.max(b - 45, -maxTilt), maxTilt);
-      let ty = Math.min(Math.max(g, -maxTilt), maxTilt);
-      targets.forEach(el => {
-        const r = el.getBoundingClientRect();
-        if (r.top < window.innerHeight && r.bottom > 0) {
-          el.style.transform = `perspective(1000px) rotateX(${tx}deg) rotateY(${ty}deg)`;
-        }
-      });
-    });
-  }
 
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
