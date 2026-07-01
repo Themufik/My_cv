@@ -29,7 +29,7 @@ window.addEventListener('resize', () => {
 });
 
 // Радиус взаимодействия (на мобилках делаем чуть меньше — 45px, чтобы палец не перекрывал весь эффект)
-const mouse = { x: -1000, y: -1000, radius: window.innerWidth < 768 ? 45 : 30 };
+const mouse = { x: -1000, y: -1000, radius: window.innerWidth < 768 ? 45 : 35 };
 
 if (textContainer) {
     // --- ДЛЯ ДЕСКТОПА (Мышь) ---

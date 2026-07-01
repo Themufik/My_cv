@@ -106,51 +106,54 @@
   <h2 class="section-title">What I've built</h2>
   <div class="projects-list">
 
-    <a href="https://github.com/Themufik/-Avrora-CRM" target="_blank" class="project-card reveal">
-      <div>
-        <div class="project-tag">// production · crm</div>
-        <div class="project-name">Avrora CRM</div>
-        <div class="project-desc">CRM система с JWT авторизацией, управлением клиентами и ролевой моделью. REST API с автодокументацией через Swagger / OpenAPI.</div>
-        <div class="project-stack">
-          <span class="tag">FastAPI</span>
-          <span class="tag">SQLAlchemy</span>
-          <span class="tag">Pydantic v2</span>
-          <span class="tag">PostgreSQL</span>
-          <span class="tag">Docker</span>
-        </div>
+<!-- Проект 2: Avrora CRM (Честное техническое описание) -->
+  <a href="https://github.com/Themufik/-Avrora-CRM" target="_blank" class="project-card reveal">
+    <div>
+      <div class="project-tag">// backend · rest api</div>
+      <div class="project-name">Avrora CRM Service</div>
+      <div class="project-desc">Разработка REST API микросервиса на FastAPI для учета клиентов с интегрированной системой безопасности. Реализована JWT-авторизация пользователей (роутер auth.py) для защиты эндпоинтов. Настроена модульная структура приложения с разделением логики по APIRouter, строгая валидация типов через Pydantic-схемы и автоматическое управление сессиями базы данных SQLite с помощью SQLAlchemy ORM.</div>
+      <div class="project-stack">
+        <span class="tag">FastAPI</span>
+        <span class="tag">JWT Auth</span>
+        <span class="tag">SQLAlchemy</span>
+        <span class="tag">Pydantic</span>
+        <span class="tag">SQLite</span>
       </div>
-      <div class="project-arrow">↗</div>
-    </a>
+    </div>
+    <div class="project-arrow">↗</div>
+  </a>
 
-    <a href="https://github.com/Themufik/Areon" target="_blank" class="project-card reveal">
-      <div>
-        <div class="project-tag">// educational · fullstack</div>
-        <div class="project-name">Areon Platform</div>
-        <div class="project-desc">Платформа для совместного использования и публикации образовательных курсов. Реализована сложная бизнес-логика: профили, комментарии, модули и кастомная панель модератора.</div>
-        <div class="project-stack">
-          <span class="tag">Django</span>
-          <span class="tag">DRF</span>
-          <span class="tag">PostgreSQL</span>
-          <span class="tag">Vanilla JS</span>
-        </div>
+<!-- Проект 3: Areon Platform (Полностью серверный рендеринг) -->
+  <a href="https://github.com/Themufik/Areon" target="_blank" class="project-card reveal">
+    <div>
+      <div class="project-tag">// backend · web application</div>
+      <div class="project-name">Areon Platform</div>
+      <div class="project-desc">Веб-платформа на Django для публикации и обмена образовательными курсами. Спроектирована реляционная структура БД (Django ORM), связывающая профили пользователей, категории, курсы и текстовый контент лекций. Логика приложения реализована через классические Server-Side Views, а пользовательский интерфейс — на базе динамических шаблонов Django Templates. Для администрирования, модерации контента и управления правами доступа настроена стандартная административная панель.</div>
+      <div class="project-stack">
+        <span class="tag">Django</span>
+        <span class="tag">Django ORM</span>
+        <span class="tag">Django Templates</span>
+        <span class="tag">SQLite</span>
       </div>
-      <div class="project-arrow">↗</div>
-    </a>
+    </div>
+    <div class="project-arrow">↗</div>
+  </a>
 
-    <a href="https://github.com/Themufik/Nova" target="_blank" class="project-card reveal">
-      <div>
-        <div class="project-tag">// active project · telegram bot</div>
-        <div class="project-name">Nova: Calorie Tracker</div>
-        <div class="project-desc">Асинхронный Телеграм-бот для трекинга КБЖУ домашней еды. Интегрирована база данных для мгновенного логирования продуктов, подсчёта калорийности сложных блюд и вывода дневной статистики.</div>
-        <div class="project-stack">
-          <span class="tag">aiogram 3.x</span>
-          <span class="tag">aiosqlite</span>
-          <span class="tag">FSM</span>
-          <span class="tag">Python</span>
-        </div>
+<!-- Проект: Nova Calorie Tracker (Честное описание) -->
+  <a href="https://github.com/Themufik/Nova" target="_blank" class="project-card reveal">
+    <div>
+      <div class="project-tag">// async core · telegram bot</div>
+      <div class="project-name">Nova: Calorie Tracker</div>
+      <div class="project-desc">Асинхронный Telegram-бот на aiogram 3.x для быстрого логирования съеденных калорий. Реализован парсинг текстовых сообщений (название и вес через пробел), калькуляция калорийности порций на основе базы данных продуктов и ежедневный учет через SQL-агрегатор SUM(). Данные сессий и логов сохраняются в локальную БД через aiosqlite. Также добавлена команда расчета ИМТ и вывода базовых рекомендаций по калоражу. Конфигурация проекта скрыта в .env.</div>
+      <div class="project-stack">
+        <span class="tag">aiogram 3.x</span>
+        <span class="tag">aiosqlite</span>
+        <span class="tag">Raw SQL</span>
+        <span class="tag">python-dotenv</span>
       </div>
-      <div class="project-arrow">↗</div>
-    </a>
+    </div>
+    <div class="project-arrow">↗</div>
+  </a>
 
   </div>
 </section>
