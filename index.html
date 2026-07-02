@@ -26,7 +26,7 @@
   <div class="hero-content">
     <span class="hero-tag">Active Custom Unix Environment</span>
     <h1 class="hero-name" id="user-name">Muhammadfarid kucharzoda</h1>
-    <p class="hero-sub">Строю производительные асинхронные бэкенды на <strong>Python</strong>. Преподаю алгоритмы и координирую тех-проекты.</p>
+    <p class="hero-sub">Строю производительные асинхронные бэкенды на <strong>Python</strong>. Преподаю алгоритмы и координирует тех-проекты.</p>
     <div class="hero-cta">
       <a href="#projects" class="btn btn-primary">View Projects</a>
       <a href="#contact" class="btn btn-secondary">Contact Me</a>
@@ -36,20 +36,38 @@
 
 <div class="divider"></div>
 
-<!-- Секция About — заголовки отдельно сверху, интерактивный текст отдельно снизу -->
-<section id="about" style="padding: 60px 40px; background: transparent;">
-
-  <!-- Заголовки как в оригинале, никакой canvas на них не влияет -->
-  <div class="about-header" style="margin-bottom: 40px;">
-    <p class="section-label" style="margin: 0;">// 01 - About</p>
-    <h2 class="section-title" style="margin: 10px 0 0 0; font-size: 3rem; font-weight: 700;">Who I am</h2>
+<section id="about">
+  <div class="about-header">
+    <p class="section-label">// 01 - About</p>
+    <h2 class="section-title">Who I am</h2>
   </div>
 
-  <!-- Отдельный чистый блок чисто под интерактивный текст -->
-  <div class="about-text-container" style="position: relative; width: 100%; min-height: 450px; overflow: hidden;">
-    <canvas id="textCanvas" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1;"></canvas>
-  </div>
+  <div class="about-dashboard">
 
+    <div class="about-text-container">
+      <canvas id="textCanvas"></canvas>
+    </div>
+
+    <div class="personal-stats-grid">
+      <div class="personal-stat-item tilt-target">
+        <div class="stat-val">FastAPI</div>
+        <div class="stat-lbl">MAIN CORE</div>
+      </div>
+      <div class="personal-stat-item tilt-target">
+        <div class="stat-val">AI & Py</div>
+        <div class="stat-lbl">TECHNOHUB MENTOR</div>
+      </div>
+      <div class="personal-stat-item tilt-target">
+        <div class="stat-val">17</div>
+        <div class="stat-lbl">YEARS OLD</div>
+      </div>
+      <div class="personal-stat-item tilt-target">
+        <div class="stat-val">Rust</div>
+        <div class="stat-lbl">NEXT TARGET</div>
+      </div>
+    </div>
+
+  </div>
 </section>
 
 <div class="divider"></div>
@@ -106,54 +124,52 @@
   <h2 class="section-title">What I've built</h2>
   <div class="projects-list">
 
-<!-- Проект 2: Avrora CRM (Честное техническое описание) -->
-  <a href="https://github.com/Themufik/-Avrora-CRM" target="_blank" class="project-card reveal">
-    <div>
-      <div class="project-tag">// backend · rest api</div>
-      <div class="project-name">Avrora CRM Service</div>
-      <div class="project-desc">Разработка REST API микросервиса на FastAPI для учета клиентов с интегрированной системой безопасности. Реализована JWT-авторизация пользователей (роутер auth.py) для защиты эндпоинтов. Настроена модульная структура приложения с разделением логики по APIRouter, строгая валидация типов через Pydantic-схемы и автоматическое управление сессиями базы данных SQLite с помощью SQLAlchemy ORM.</div>
-      <div class="project-stack">
-        <span class="tag">FastAPI</span>
-        <span class="tag">JWT Auth</span>
-        <span class="tag">SQLAlchemy</span>
-        <span class="tag">Pydantic</span>
-        <span class="tag">SQLite</span>
-      </div>
-    </div>
-    <div class="project-arrow">↗</div>
-  </a>
+    <a href="https://github.com/Themufik/-Avrora-CRM" target="_blank" class="project-card reveal">
+      <div>
+        <div class="project-tag">// backend · rest api</div>
+        <div class="project-name">Quark CRM Service</div>
+        <div class="project-desc">Разработка REST API микросервиса на FastAPI для учета клиентов с интегрированной системой безопасности. Реализована JWT-авторизация пользователей (роутер auth.py) для защиты эндпоинтов. Настроена модульная структура приложения с разделением логики по APIRouter, строгая валидация типов через Pydantic-схемы и автоматическое управление сессиями базы данных SQLite с помощью SQLAlchemy ORM.</div>
 
-<!-- Проект 3: Areon Platform (Полностью серверный рендеринг) -->
-  <a href="https://github.com/Themufik/Areon" target="_blank" class="project-card reveal">
-    <div>
-      <div class="project-tag">// backend · web application</div>
-      <div class="project-name">Areon Platform</div>
-      <div class="project-desc">Веб-платформа на Django для публикации и обмена образовательными курсами. Спроектирована реляционная структура БД (Django ORM), связывающая профили пользователей, категории, курсы и текстовый контент лекций. Логика приложения реализована через классические Server-Side Views, а пользовательский интерфейс — на базе динамических шаблонов Django Templates. Для администрирования, модерации контента и управления правами доступа настроена стандартная административная панель.</div>
-      <div class="project-stack">
-        <span class="tag">Django</span>
-        <span class="tag">Django ORM</span>
-        <span class="tag">Django Templates</span>
-        <span class="tag">SQLite</span>
+        <div class="project-stack">
+          <span class="tag">FastAPI</span>
+          <span class="tag">JWT Auth</span>
+          <span class="tag">SQLAlchemy</span>
+          <span class="tag">Pydantic</span>
+          <span class="tag">SQLite</span>
+        </div>
       </div>
-    </div>
-    <div class="project-arrow">↗</div>
-  </a>
+      <div class="project-arrow">↗</div>
+    </a>
 
-<!-- Проект: Nova Calorie Tracker (Честное описание) -->
-  <a href="https://github.com/Themufik/Nova" target="_blank" class="project-card reveal">
-    <div>
-      <div class="project-tag">// async core · telegram bot</div>
-      <div class="project-name">Nova: Calorie Tracker</div>
-      <div class="project-desc">Асинхронный Telegram-бот на aiogram 3.x для быстрого логирования съеденных калорий. Реализован парсинг текстовых сообщений (название и вес через пробел), калькуляция калорийности порций на основе базы данных продуктов и ежедневный учет через SQL-агрегатор SUM(). Данные сессий и логов сохраняются в локальную БД через aiosqlite. Также добавлена команда расчета ИМТ и вывода базовых рекомендаций по калоражу. Конфигурация проекта скрыта в .env.</div>
-      <div class="project-stack">
-        <span class="tag">aiogram 3.x</span>
-        <span class="tag">aiosqlite</span>
-        <span class="tag">Raw SQL</span>
-        <span class="tag">python-dotenv</span>
+    <a href="https://github.com/Themufik/Areon" target="_blank" class="project-card reveal">
+      <div>
+        <div class="project-tag">// backend · web application</div>
+        <div class="project-name">Areon Platform</div>
+        <div class="project-desc">Веб-платформа на Django для публикации и обмена образовательными курсами. Спроектирована реляционная структура БД (Django ORM), связывающая профили пользователей, категории, курсы и текстовый контент лекций. Логика приложения реализована через классические Server-Side Views, а пользовательский интерфейс — на базе динамических шаблонов Django Templates. Для администрирования, модерации контента и управления правами доступа настроена стандартная административная панель.</div>
+        <div class="project-stack">
+          <span class="tag">Django</span>
+          <span class="tag">Django ORM</span>
+          <span class="tag">Django Templates</span>
+          <span class="tag">SQLite</span>
+        </div>
       </div>
-    </div>
-    <div class="project-arrow">↗</div>
-  </a>
+      <div class="project-arrow">↗</div>
+    </a>
+
+    <a href="https://github.com/Themufik/Nova" target="_blank" class="project-card reveal">
+      <div>
+        <div class="project-tag">// async core · telegram bot</div>
+        <div class="project-name">Nova: Calorie Tracker</div>
+        <div class="project-desc">Асинхронный Telegram-бот на aiogram 3.x для быстрого логирования съеденных калорий. Реализован парсинг текстовых сообщений (название и вес через пробел), калькуляция калорийности порций на основе базы данных продуктов и ежедневный учет через SQL-агрегатор SUM(). Данные сессий и логов сохраняются в локальную БД через aiosqlite. Также добавлена команда расчета ИМТ и вывода базовых рекомендаций по калоражу. Конфигурация проекта скрыта в .env.</div>
+        <div class="project-stack">
+          <span class="tag">aiogram 3.x</span>
+          <span class="tag">aiosqlite</span>
+          <span class="tag">Raw SQL</span>
+          <span class="tag">python-dotenv</span>
+        </div>
+      </div>
+      <div class="project-arrow">↗</div>
+    </a>
 
   </div>
 </section>
@@ -187,6 +203,7 @@
 <script src="main.js"></script>
 
 <script>
+  // Скрипты 3D-наклона карточек (.tilt-target)
   const targets = document.querySelectorAll('.tilt-target');
   const maxTilt = 12;
 
@@ -207,6 +224,7 @@
     });
   });
 
+  // Эффект плавного проявления элементов при скролле (.reveal)
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
